@@ -14,21 +14,21 @@ Microsoft is committed to mitigating the attack surface for the Windows operatin
 [CodeQL](https://securitylab.github.com/tools/codeql), by GitHub, is a powerful static analysis technology for securing software. The combination of an extensive suite of high-value security queries and a robust platform make it an invaluable tool for securing third party driver code.
 
 The main topics of discussion is:
-	- How to Use CodeQL to analyze your driver source code for known high impact security issues.
-	- How to ensure the Static Tools Logo Test can consume the results of running CodeQL.
-	- How to determine which "Must-Fix" queries must be run without error for certification, as part of the WHCP.
-			§ This link is sent to the editing page of the document
+- How to Use CodeQL to analyze your driver source code for known high impact security issues.
+- How to ensure the Static Tools Logo Test can consume the results of running CodeQL.
+- How to determine which "Must-Fix" queries must be run without error for certification, as part of the WHCP.
+- 	This link is sent to the editing page of the document
 
 
 ## Concepts for CodeQL
 
 **CodeQL** is the analysis engine used by developers to perform security analysis. Some important terms to remember with CodeQL is:
 
-	- Queryable database, extracted from driver source code.
-	- Queries also known as  "checks" or "rules" represents a distinct security vulnerability that is being searched for
-	- Log files are generated during database creation, query execution, and other operations that are used for the Statics Tools Logo test
-	- Must fix rules are rules that the user Must fix in their driver if violated
-	- CLI version the command line interface version is the binaries for the tool the CLI must match the queries 
+- Queryable database, extracted from driver source code.
+- Queries also known as  "checks" or "rules" represents a distinct security vulnerability that is being searched for
+- Log files are generated during database creation, query execution, and other operations that are used for the Statics Tools Logo test
+- Must fix rules are rules that the user Must fix in their driver if violated
+- CLI version the command line interface version is the binaries for the tool the CLI must match the queries 
 
 
 This topic details how to perform analysis using CodeQL command line interface (CLI) with a focus on driver developers for Windows. Supplementary documentation can be found at [CodeQL Getting Started](https://codeql.github.com/docs/codeql-cli/getting-started-with-the-codeql-cli/).
