@@ -502,4 +502,4 @@ Microsoft ships as part of the Windows Driver Kit (WDK) and Enterprise WDK (eWDK
 
 ### I have comments or questions around how to use CodeQL on my driver, where do I send feedback?
 
-Send all feedback and questions to [stlogohelp@microsoft.com](mailto:stlogohelp@microsoft.com).
+Send all feedback and questions to [stlogohelp@microsoft.com](mailto:stlogohelp@microsoft.com).m
