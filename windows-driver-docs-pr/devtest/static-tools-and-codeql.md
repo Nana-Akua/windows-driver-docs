@@ -14,9 +14,9 @@ Microsoft is committed to mitigating the attack surface for the Windows operatin
 [CodeQL](https://securitylab.github.com/tools/codeql), by GitHub, is a powerful static analysis technology for securing software. The combination of an extensive suite of high-value security queries and a robust platform make it an invaluable tool for securing third party driver code.
 
 The main topics of discussion is:
-	• How to Use CodeQL to analyze your driver source code for known high impact security issues.
-	• How to ensure the Static Tools Logo Test can consume the results of running CodeQL.
-	• How to determine which "Must-Fix" queries must be run without error for certification, as part of the WHCP.
+	- How to Use CodeQL to analyze your driver source code for known high impact security issues.
+	- How to ensure the Static Tools Logo Test can consume the results of running CodeQL.
+	- How to determine which "Must-Fix" queries must be run without error for certification, as part of the WHCP.
 			§ This link is sent to the editing page of the document
 
 
