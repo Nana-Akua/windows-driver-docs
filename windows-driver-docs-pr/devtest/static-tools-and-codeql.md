@@ -13,7 +13,7 @@ Microsoft is committed to mitigating the attack surface for the Windows operatin
 
 [CodeQL](https://securitylab.github.com/tools/codeql), by GitHub, is a powerful static analysis technology for securing software. The combination of an extensive suite of high-value security queries and a robust platform make it an invaluable tool for securing third party driver code.
 
-The main topics of discussion is:
+The main topics of discussion are:
 - How to Use CodeQL to analyze your driver source code for known high impact security issues.
 - How to ensure the Static Tools Logo Test can consume the results of running CodeQL.
 - How to determine which "Must-Fix" queries must be run without error for certification, as part of the WHCP.
@@ -22,9 +22,8 @@ The main topics of discussion is:
 
 ## Concepts for CodeQL
 
-**CodeQL** is the analysis engine used by developers to perform security analysis. Some important terms to remember with CodeQL is:
+**CodeQL** is the analysis engine used by developers to perform security analysis. Some important terms to remember with CodeQL are:
 
-- Queryable database, extracted from driver source code.
 - Queries also known as  "checks" or "rules" represents a distinct security vulnerability that is being searched for
 - Log files are generated during database creation, query execution, and other operations that are used for the Statics Tools Logo test
 - Must fix rules are rules that the user Must fix in their driver if violated
@@ -51,10 +50,10 @@ We will use the [CodeQL command line tools (CLI)](https://codeql.github.com/docs
 
 1. Confirm that the CodeQL command works using the command below
 
- ```console
+   ```console
     codeql  --help
    ```
-The command line interface should look like this if installed correctly
+   The command line interface should look like this if installed correctly
    ```console
    C:\codeql-home\codeql\>codeql --help
    Usage: codeql <command> <argument>...
