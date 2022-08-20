@@ -82,9 +82,9 @@ We will use the [CodeQL command line tools (CLI)](https://codeql.github.com/docs
 
 ### Clone the repository to access the driver-specific queries
 
-1. Navigate to the [Windows Driver Developer Supplemental Tools repository](https://github.com/microsoft/Windows-Driver-Developer-Supplemental-Tools) to determine the appropriate release branch neeced to clone the repository.
+1. Navigate to the [Windows Driver Developer Supplemental Tools repository](https://github.com/microsoft/Windows-Driver-Developer-Supplemental-Tools) to determine the appropriate release branch needed to clone the repository.
 
-1. [Clone](https://github.com/git-guides/git-clone) the repository to download all CodeQL queries and [query suites](https://codeql.github.com/docs/codeql-cli/creating-codeql-query-suites/) with driver-specific queries.
+1.Clone the repository with the [get clone](https://github.com/git-guides/git-clone) command to download all CodeQL queries and [query suites](https://codeql.github.com/docs/codeql-cli/creating-codeql-query-suites/) with driver-specific queries.
 
 ```console
 git clone https://github.com/microsoft/Windows-Driver-Developer-Supplemental-Tools.git --recursive -b RELEASE_BRANCH
