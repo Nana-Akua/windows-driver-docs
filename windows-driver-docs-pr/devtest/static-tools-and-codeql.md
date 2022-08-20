@@ -82,7 +82,7 @@ We will use the [CodeQL command line tools (CLI)](https://codeql.github.com/docs
 
 ### Clone the repository to access the driver-specific queries
 
-1. Navigate to the [Windows Driver Developer Supplemental Tools repository](https://github.com/microsoft/Windows-Driver-Developer-Supplemental-Tools).
+1. Navigate to the [Windows Driver Developer Supplemental Tools repository](https://github.com/microsoft/Windows-Driver-Developer-Supplemental-Tools) to determine the appropriate release branch neeced to clone the repository.
 
 1. [Clone](https://github.com/git-guides/git-clone) the repository to download all CodeQL queries and [query suites](https://codeql.github.com/docs/codeql-cli/creating-codeql-query-suites/) with driver-specific queries.
 
@@ -96,14 +96,16 @@ Replace RELEASE_BRANCH with the appropriate branch depending on the OS you are c
 |---------------------------------|-----------------|
 | Windows Server 2022             | WHCP_21H2       |
 | Windows 11                      | WHCP_21H2       |
+| Windows 11, version 22H2        | WHCP_22H2       |
 
 If you have already cloned the repository and need to switch to a different branch, you can switch to the appropriate branch by running git fetch and git checkout from your local copy of the repository:
 
 ```console
-C:\codeql-home\Windows-Driver-Developer-Supplemental-Tools>git fetch --all
-C:\codeql-home\Windows-Driver-Developer-Supplemental-Tools>git checkout RELEASE_BRANCH
+git fetch --all 
 ```
-
+```console
+git checkout RELEASE_BRANCH
+```
 > [!NOTE]
 > Usage of CodeQL for the purpose of WHCP testing is acceptable under the **[Hardware Lab Kit (HLK)](/windows-hardware/test/hlk/) End User License Agreement**. For WHCP participants, the HLK's EULA overwrites GitHub's CodeQL Terms and Conditions. The HLK EULA states that CodeQL **can be used** during automated analysis, CI or CD, as part of normal engineering processes for the purposes of analyzing drivers to be submitted and certified as part of the WHCP.
 
