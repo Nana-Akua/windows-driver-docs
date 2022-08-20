@@ -113,7 +113,12 @@ This page assumes a Windows development environment and that the repository will
 
 ## Building your CodeQL Database
 
-The next steps create a CodeQL database that you can use for analysis.
+The next steps are to create a CodeQL database that you can use for analysis.
+
+CodeQL uses the MSBuild compiler to process the C++ code to prepare it to be analyzed.
+
+> [!NOTE]
+> CodeQL does not require MSBuild or Visual Studio to be used. See [supported languges and frameworks](https://codeql.github.com/docs/codeql-overview/supported-languages-and-frameworks/) for a list of which compilers are supported.
 
 Create a directory to keep CodeQL databases (the databases folder). This example will use *C:\codeql-home\databases*
 
@@ -133,10 +138,7 @@ For help using the database create command, type:
 codeql database create --help
 ```
 
-In this example, CodeQL uses the MSBuild compiler to process the C++ code to prepare it to be analyzed.
 
-> [!NOTE]
-> CodeQL does not require MSBuild or Visual Studio to be used. See [supported languges and frameworks](https://codeql.github.com/docs/codeql-overview/supported-languages-and-frameworks/) for a list of which compilers are supported.
 
 ### Example
 
