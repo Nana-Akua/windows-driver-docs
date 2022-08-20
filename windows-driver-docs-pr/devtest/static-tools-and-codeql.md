@@ -86,9 +86,9 @@ We will use the [CodeQL command line tools (CLI)](https://codeql.github.com/docs
 
 1. [Clone](https://github.com/git-guides/git-clone) the repository to download all CodeQL queries and [query suites](https://codeql.github.com/docs/codeql-cli/creating-codeql-query-suites/) with driver-specific queries.
 
-   ```console
-   C:\codeql-home\>git clone https://github.com/microsoft/Windows-Driver-Developer-Supplemental-Tools.git --recursive -b RELEASE_BRANCH
-   ```
+```console
+git clone https://github.com/microsoft/Windows-Driver-Developer-Supplemental-Tools.git --recursive -b RELEASE_BRANCH
+```
 
 Replace RELEASE_BRANCH with the appropriate branch depending on the OS you are certifying for, per the following table:
 
