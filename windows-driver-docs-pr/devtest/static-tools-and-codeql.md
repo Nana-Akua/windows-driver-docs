@@ -184,8 +184,13 @@ codeql database analyze <database> <path to query, suite or directory> search-pa
 
 The *"-j 0"* flag indicates to use as many threads as there are CPU's in the analysis portion.
 
-Display help on the codeql database analyze command using the `--help` parameter.
+Display help on the codeql database analyze command using the command below:
 
+```console
+codeql database analyze --help
+
+```
+The help menu should look like what is shown below:
 ```console
 C:\codeql-home\codeql>codeql database analyze --help
 Usage: codeql database analyze [OPTIONS] <database> [<query|dir|suite>...]
