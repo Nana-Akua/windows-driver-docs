@@ -129,7 +129,7 @@ A command line environment that is used for building driver source code, such as
 2. Create a CodeQL database with the following CodeQL database create command from below:
 
   ```console
-  codeql database create -l=[cpp/csharp/python/java/javascript/go/xml] -s=<path to source code> -c=<command to build> <database folder>\<project name> -j 0
+  codeql database create -l=[cpp/csharp/python/java/javascript/go/xml] -s=<path to source code> -c="msbuild /t:rebuild <command to build> <database folder>\<project name> -j 0
   ```
 
 For help using the database create command, type:
