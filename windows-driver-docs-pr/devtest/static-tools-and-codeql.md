@@ -9,28 +9,26 @@ ms.date: 05/06/2022
 
 # CodeQL and the Static Tools Logo Test
 
-Microsoft is committed to mitigating the attack surface for the Windows operating system, and ensuring that third party drivers meet a strong security bar is critical to accomplishing that goal. One step in setting this security bar that Microsoft is taking is adding a new requirement to the [Windows Hardware Compatibility Program](/windows-hardware/design/compatibility) (WHCP). This requirement states that all driver submissions must use the [CodeQL](https://securitylab.github.com/tools/codeql) engine on driver source code and fix any violations that are deemed **"Must-Fix"**.
+Microsoft is committed to mitigating the attack surface for the Windows operating system, and ensuring that third party drivers meet a strong security bar is critical to accomplishing that goal. One step in setting this security bar is requiring driver submissions be tested with CodeQL (find a conducive link) for the Windows Hardware Compatibility Program (WHCP). This requirement specifically states that all driver submissions must use the CodeQL engine on driver source code and fix any violations that are deemed "Must-Fix"( LINK TO EXPLAINING Must-fix) this is enforced by the Statics tool logo test .
 
 [CodeQL](https://securitylab.github.com/tools/codeql), by GitHub, is a powerful static analysis technology for securing software. The combination of an extensive suite of high-value security queries and a robust platform make it an invaluable tool for securing third party driver code.
 
-Usage of CodeQL for the purpose of WHCP testing is acceptable under the **[Hardware Lab Kit (HLK)](/windows-hardware/test/hlk/) End User License Agreement**. For WHCP participants, the HLK's EULA overwrites GitHub's CodeQL Terms and Conditions. The HLK EULA states that CodeQL **can be used** during automated analysis, CI or CD, as part of normal engineering processes for the purposes of analyzing drivers to be submitted and certified as part of the WHCP.
+The main topics of discussion are:
+- How to Use CodeQL to analyze your driver source code for known high impact security issues.
+- How to ensure the Static Tools Logo Test can consume the results of running CodeQL.
+- How to determine which "Must-Fix" queries must be run without error for certification, as part of the WHCP.
+- 	This link is sent to the editing page of the document
 
-The requirement to analyze the driver source code and fix any **"Must-Fix"** violations will be enforced by the [Static Tools Logo Test](/windows-hardware/test/hlk/testref/6ab6df93-423c-4af6-ad48-8ea1049155ae).
-
-This topic describes how to:
-
-- Use CodeQL to analyze your driver source code for known high impact security issues.
-- Ensure the Static Tools Logo Test can consume the results of running CodeQL.
-- Determine which **"Must-Fix"** [queries](#must-fix-queries) must be run without error for certification, as part of the WHCP.
 
 ## Concepts for CodeQL
 
-**CodeQL** is the analysis engine used by developers to perform security analysis. A **CodeQL database** is a directory containing:
+**CodeQL** is the analysis engine used by developers to perform security analysis. Some important terms to remember with CodeQL are:
 
-- Queryable data, extracted from driver source code.
-- A source reference, for displaying query results directly in source code. A **query** can be thought of as a "check" or "rule". Each query represents a distinct security vulnerability that is being searched for. For more information, see [Writing queries](https://codeql.github.com/docs/writing-codeql-queries/codeql-queries/) in the CodeQL docs.
-- Query results.
-- Log files generated during database creation, query execution, and other operations.
+- Queries also known as  "checks" or "rules" represents a distinct security vulnerability that is being searched for
+- Log files are generated during database creation, query execution, and other operations that are used for the Statics Tools Logo test
+- Must fix rules are rules that the user Must fix in their driver if violated
+- CLI version the command line interface version is the binaries for the tool the CLI must match the queries 
+
 
 This topic details how to perform analysis using CodeQL command line interface (CLI) with a focus on driver developers for Windows. Supplementary documentation can be found at [CodeQL Getting Started](https://codeql.github.com/docs/codeql-cli/getting-started-with-the-codeql-cli/).
 
@@ -43,19 +41,19 @@ We will use the [CodeQL command line tools (CLI)](https://codeql.github.com/docs
 1. The first task will be to create a directory to contain CodeQL. This example will use `C:\codeql-home\`
 
    ```console
-   C:\> mkdir C:\codeql-home
+    mkdir C:\codeql-home
    ```
 
-1. Refer to [Windows Driver Developer Supplemental Tools](https://github.com/microsoft/Windows-Driver-Developer-Supplemental-Tools) for the version of the CodeQL tools required for use with the desired branch of Microsoft's QL libraries. See [Clone the repository to access the driver-specific queries](#clone-the-repository-to-access-the-driver-specific-queries) for a table showing the available branches. Using a different version may result in a database incompatible with these libraries.
+1. Go to the Github [CodeQL Download Page](https://github.com/github/codeql-cli-binaries/releases/) and download the current CodeQL zip file if you are certifying a driver for the Windows Hardware Compatibility Program.
 
-1. Navigate to the Github [CodeQL Download Page](https://github.com/github/codeql-cli-binaries/releases/) for the required release.
+1. Unzip the codeql folder and place it in the directory created in step 1, for example, C:\codeql-home\codeql\.
 
-1. Download the zip file if you are certifying a driver for the Windows Hardware Compatibility Program. For example for 64 bit Windows "codeql-win64.zip".
+1. Confirm that the CodeQL command works using the command below
 
-1. Unzip the codeql folder in the zip file to a directory, for example,  `C:\codeql-home\codeql\`.
-
-1. Confirm that the CodeQL command works by displaying the help.
-
+   ```console
+    codeql  --help
+   ```
+   The command line interface should look like this if installed correctly
    ```console
    C:\codeql-home\codeql\>codeql --help
    Usage: codeql <command> <argument>...
@@ -84,13 +82,13 @@ We will use the [CodeQL command line tools (CLI)](https://codeql.github.com/docs
 
 ### Clone the repository to access the driver-specific queries
 
-1. Navigate to the [Microsoft CodeQL GitHub repository](https://github.com/microsoft/Windows-Driver-Developer-Supplemental-Tools).
+1. Navigate to the [Windows Driver Developer Supplemental Tools repository](https://github.com/microsoft/Windows-Driver-Developer-Supplemental-Tools) to determine the appropriate release branch needed to clone the repository.
 
-1. [Clone](https://github.com/git-guides/git-clone) the repository to download all CodeQL queries and [query suites](https://codeql.github.com/docs/codeql-cli/creating-codeql-query-suites/) with driver-specific queries.
+2. Clone the repository with the [get clone](https://github.com/git-guides/git-clone) command to download all CodeQL queries and [query suites](https://codeql.github.com/docs/codeql-cli/creating-codeql-query-suites/) with driver-specific queries.
 
-   ```console
-   C:\codeql-home\>git clone https://github.com/microsoft/Windows-Driver-Developer-Supplemental-Tools.git --recursive -b RELEASE_BRANCH
-   ```
+  ```console
+  git clone https://github.com/microsoft/Windows-Driver-Developer-Supplemental-Tools.git --recursive -b RELEASE_BRANCH
+  ```
 
 Replace RELEASE_BRANCH with the appropriate branch depending on the OS you are certifying for, per the following table:
 
@@ -98,14 +96,16 @@ Replace RELEASE_BRANCH with the appropriate branch depending on the OS you are c
 |---------------------------------|-----------------|
 | Windows Server 2022             | WHCP_21H2       |
 | Windows 11                      | WHCP_21H2       |
+| Windows 11, version 22H2        | WHCP_22H2       |
 
 If you have already cloned the repository and need to switch to a different branch, you can switch to the appropriate branch by running git fetch and git checkout from your local copy of the repository:
 
-```console
-C:\codeql-home\Windows-Driver-Developer-Supplemental-Tools>git fetch --all
-C:\codeql-home\Windows-Driver-Developer-Supplemental-Tools>git checkout RELEASE_BRANCH
-```
-
+  ```console
+  git fetch --all 
+  ```
+  ```console
+  git checkout RELEASE_BRANCH
+  ```
 > [!NOTE]
 > Usage of CodeQL for the purpose of WHCP testing is acceptable under the **[Hardware Lab Kit (HLK)](/windows-hardware/test/hlk/) End User License Agreement**. For WHCP participants, the HLK's EULA overwrites GitHub's CodeQL Terms and Conditions. The HLK EULA states that CodeQL **can be used** during automated analysis, CI or CD, as part of normal engineering processes for the purposes of analyzing drivers to be submitted and certified as part of the WHCP.
 
@@ -113,36 +113,34 @@ This page assumes a Windows development environment and that the repository will
 
 ## Building your CodeQL Database
 
-The next steps create a CodeQL database that you can use for analysis.
+The next steps are to create a CodeQL database that you can use for analysis.
 
-Create a directory to keep CodeQL databases (the databases folder). This example will use *C:\codeql-home\databases*
-
-```console
-mkdir C:\codeql-home\databases
-```
-
-In general, the command used to create a CodeQL database will look like the following:
-
-```console
-codeql database create -l=[cpp/csharp/python/java/javascript/go/xml] -s=<path to source code> -c=<command to build> <database folder>\<project name> -j 0
-```
-
-For help using the database create command, type:
-
-```console
-codeql database create --help
-```
-
-In this example, CodeQL uses the MSBuild compiler to process the C++ code to prepare it to be analyzed.
+A command line environment that is used for building driver source code, such as the [Enterprise Windows Driver Kit (EWDK)](../develop/using-the-enterprise-wdk.md), must be used to navigate to the CodeQL tools folder where the repository was cloned. If you are building the driver using Visual Studio, you can configure the CodeQL queries to run as a post build event as discussed in [Visual Studio Post-Build Event](#visual-studio-post-build-event) in this topic.
 
 > [!NOTE]
 > CodeQL does not require MSBuild or Visual Studio to be used. See [supported languges and frameworks](https://codeql.github.com/docs/codeql-overview/supported-languages-and-frameworks/) for a list of which compilers are supported.
 
+1. Create a directory to keep CodeQL databases (the databases folder). This example will use *C:\codeql-home\databases*
+
+  ```console
+  mkdir C:\codeql-home\databases
+  ```
+
+2. Create a CodeQL database with the following CodeQL database create command from below:
+
+  ```console
+  codeql database create -l=[cpp/csharp/python/java/javascript/go/xml] -s=<path to source code> -c="msbuild /t:rebuild <command to build> <database folder>\<project name> -j 0
+  ```
+
+For help using the database create command, type:
+
+  ```console
+  codeql database create --help
+  ```
+
 ### Example
 
-Using a command line environment that is used for building driver source code, such as the [Enterprise Windows Driver Kit (EWDK)](../develop/using-the-enterprise-wdk.md), navigate to the CodeQL tools folder where the repository was cloned. If you are building the driver using Visual Studio, you can configure the CodeQL queries to run as a post build event as discussed in [Visual Studio Post-Build Event](#visual-studio-post-build-event) in this topic.
-
-This example will process the evaluate the kmdfecho.sln driver sample, which is [available on GitHub](https://github.com/Microsoft/Windows-driver-samples/tree/master/general/echo/kmdf). The example below places the kmdf sample in the `C:\codeql-home\drivers\kmdf` directory.
+This example will process the evaluate the [KMDF Echo driver sample](https://github.com/Microsoft/Windows-driver-samples/tree/master/general/echo/kmdf) which is available on GitHub. The example below places the kmdf sample in the `C:\codeql-home\drivers\kmdf` directory.
 
 Run the following commands to create a new CodeQL database under *C:\codeql-home\databases\kmdf*.
 
@@ -181,17 +179,18 @@ For the purposes of this example, it is assumed that the suite of queries to be 
 The *"database analyze"* command to execute analysis uses the following syntax:
 
 ```console
-codeql database analyze <database> <path to query, suite or directory>
---search-path=<path to search for packages>
---format=[csv/sarif-latest/sarifv1/sarifv2/sarifv2.1.0/graphtext/dgml]
---output=<output file directory>\output file name>
--j 0
+codeql database analyze <database> <path to query, suite or directory> search-path=<path to search for packages> format=[csv/sarif-latest/sarifv1/sarifv2/sarifv2.1.0/graphtext/dgml] output=<output file directory>\output file name> -j 0
 ```
 
 The *"-j 0"* flag indicates to use as many threads as there are CPU's in the analysis portion.
 
-Display help on the codeql database analyze command using the `--help` parameter.
+Display help on the codeql database analyze command using the command below:
 
+```console
+codeql database analyze --help
+
+```
+The help menu should look like what is shown below:
 ```console
 C:\codeql-home\codeql>codeql database analyze --help
 Usage: codeql database analyze [OPTIONS] <database> [<query|dir|suite>...]
