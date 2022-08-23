@@ -84,7 +84,7 @@ We will use the [CodeQL command line tools (CLI)](https://codeql.github.com/docs
 
 1. Navigate to the [Windows Driver Developer Supplemental Tools repository](https://github.com/microsoft/Windows-Driver-Developer-Supplemental-Tools) to determine the appropriate release branch needed to clone the repository.
 
-1.Clone the repository with the [get clone](https://github.com/git-guides/git-clone) command to download all CodeQL queries and [query suites](https://codeql.github.com/docs/codeql-cli/creating-codeql-query-suites/) with driver-specific queries.
+2. Clone the repository with the [get clone](https://github.com/git-guides/git-clone) command to download all CodeQL queries and [query suites](https://codeql.github.com/docs/codeql-cli/creating-codeql-query-suites/) with driver-specific queries.
 
 ```console
 git clone https://github.com/microsoft/Windows-Driver-Developer-Supplemental-Tools.git --recursive -b RELEASE_BRANCH
@@ -115,18 +115,18 @@ This page assumes a Windows development environment and that the repository will
 
 The next steps are to create a CodeQL database that you can use for analysis.
 
-CodeQL uses the MSBuild compiler to process the C++ code to prepare it to be analyzed.
+A command line environment that is used for building driver source code, such as the [Enterprise Windows Driver Kit (EWDK)](../develop/using-the-enterprise-wdk.md), must be used to navigate to the CodeQL tools folder where the repository was cloned. If you are building the driver using Visual Studio, you can configure the CodeQL queries to run as a post build event as discussed in [Visual Studio Post-Build Event](#visual-studio-post-build-event) in this topic.
 
 > [!NOTE]
 > CodeQL does not require MSBuild or Visual Studio to be used. See [supported languges and frameworks](https://codeql.github.com/docs/codeql-overview/supported-languages-and-frameworks/) for a list of which compilers are supported.
 
-Create a directory to keep CodeQL databases (the databases folder). This example will use *C:\codeql-home\databases*
+1. Create a directory to keep CodeQL databases (the databases folder). This example will use *C:\codeql-home\databases*
 
 ```console
 mkdir C:\codeql-home\databases
 ```
 
-In general, the command used to create a CodeQL database will look like the following:
+2. Create a CodeQL database with the following CodeQL database create command from below:
 
 ```console
 codeql database create -l=[cpp/csharp/python/java/javascript/go/xml] -s=<path to source code> -c=<command to build> <database folder>\<project name> -j 0
@@ -142,9 +142,7 @@ codeql database create --help
 
 ### Example
 
-Using a command line environment that is used for building driver source code, such as the [Enterprise Windows Driver Kit (EWDK)](../develop/using-the-enterprise-wdk.md), navigate to the CodeQL tools folder where the repository was cloned. If you are building the driver using Visual Studio, you can configure the CodeQL queries to run as a post build event as discussed in [Visual Studio Post-Build Event](#visual-studio-post-build-event) in this topic.
-
-This example will process the evaluate the kmdfecho.sln driver sample, which is [available on GitHub](https://github.com/Microsoft/Windows-driver-samples/tree/master/general/echo/kmdf). The example below places the kmdf sample in the `C:\codeql-home\drivers\kmdf` directory.
+This example will process the evaluate the [KMDF Echo driver sample](https://github.com/Microsoft/Windows-driver-samples/tree/master/general/echo/kmdf) which is available on GitHub. The example below places the kmdf sample in the `C:\codeql-home\drivers\kmdf` directory.
 
 Run the following commands to create a new CodeQL database under *C:\codeql-home\databases\kmdf*.
 
