@@ -179,11 +179,7 @@ For the purposes of this example, it is assumed that the suite of queries to be 
 The *"database analyze"* command to execute analysis uses the following syntax:
 
 ```console
-codeql database analyze <database> <path to query, suite or directory>
---search-path=<path to search for packages>
---format=[csv/sarif-latest/sarifv1/sarifv2/sarifv2.1.0/graphtext/dgml]
---output=<output file directory>\output file name>
--j 0
+codeql database analyze <database> <path to query, suite or directory> search-path=<path to search for packages> format=[csv/sarif-latest/sarifv1/sarifv2/sarifv2.1.0/graphtext/dgml] output=<output file directory>\output file name> -j 0
 ```
 
 The *"-j 0"* flag indicates to use as many threads as there are CPU's in the analysis portion.
