@@ -86,9 +86,9 @@ We will use the [CodeQL command line tools (CLI)](https://codeql.github.com/docs
 
 2. Clone the repository with the [get clone](https://github.com/git-guides/git-clone) command to download all CodeQL queries and [query suites](https://codeql.github.com/docs/codeql-cli/creating-codeql-query-suites/) with driver-specific queries.
 
-```console
-git clone https://github.com/microsoft/Windows-Driver-Developer-Supplemental-Tools.git --recursive -b RELEASE_BRANCH
-```
+  ```console
+  git clone https://github.com/microsoft/Windows-Driver-Developer-Supplemental-Tools.git --recursive -b RELEASE_BRANCH
+  ```
 
 Replace RELEASE_BRANCH with the appropriate branch depending on the OS you are certifying for, per the following table:
 
@@ -100,12 +100,12 @@ Replace RELEASE_BRANCH with the appropriate branch depending on the OS you are c
 
 If you have already cloned the repository and need to switch to a different branch, you can switch to the appropriate branch by running git fetch and git checkout from your local copy of the repository:
 
-```console
-git fetch --all 
-```
-```console
-git checkout RELEASE_BRANCH
-```
+  ```console
+  git fetch --all 
+  ```
+  ```console
+  git checkout RELEASE_BRANCH
+  ```
 > [!NOTE]
 > Usage of CodeQL for the purpose of WHCP testing is acceptable under the **[Hardware Lab Kit (HLK)](/windows-hardware/test/hlk/) End User License Agreement**. For WHCP participants, the HLK's EULA overwrites GitHub's CodeQL Terms and Conditions. The HLK EULA states that CodeQL **can be used** during automated analysis, CI or CD, as part of normal engineering processes for the purposes of analyzing drivers to be submitted and certified as part of the WHCP.
 
@@ -122,23 +122,21 @@ A command line environment that is used for building driver source code, such as
 
 1. Create a directory to keep CodeQL databases (the databases folder). This example will use *C:\codeql-home\databases*
 
-```console
-mkdir C:\codeql-home\databases
-```
+  ```console
+  mkdir C:\codeql-home\databases
+  ```
 
 2. Create a CodeQL database with the following CodeQL database create command from below:
 
-```console
-codeql database create -l=[cpp/csharp/python/java/javascript/go/xml] -s=<path to source code> -c=<command to build> <database folder>\<project name> -j 0
-```
+  ```console
+  codeql database create -l=[cpp/csharp/python/java/javascript/go/xml] -s=<path to source code> -c=<command to build> <database folder>\<project name> -j 0
+  ```
 
 For help using the database create command, type:
 
-```console
-codeql database create --help
-```
-
-
+  ```console
+  codeql database create --help
+  ```
 
 ### Example
 
